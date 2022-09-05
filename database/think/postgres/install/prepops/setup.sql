@@ -22,6 +22,7 @@ VALUES (1, 'Subscription'),
 (5, 'Basic Package'),
 (6, 'AdHoc Package'),
 (7, 'Pooled Package'),
-(8, 'Quick Order');
+(8, 'Quick Order'),
+(9, 'Catalog Order');
 
 COMMIT;

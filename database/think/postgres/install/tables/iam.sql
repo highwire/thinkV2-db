@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS thdb.tk_iam_m_tenantStatus
 (
-      tStatusId      SMALLINT          PRIMARY KEY,
+      tStatusId     SMALLINT          PRIMARY KEY,
       status        VARCHAR(16)       NOT NULL,
 	recStatus	  SMALLINT		  DEFAULT 1 NOT NULL
 );
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS thdb.tk_iam_m_timezones
 (
       timeZoneId    SMALLINT          PRIMARY KEY,
       move          SMALLINT          DEFAULT 241 NOT NULL,
-      offset       VARCHAR(5)        DEFAULT '00:00' NOT NULL,
+      offset        VARCHAR(5)        DEFAULT '00:00' NOT NULL,
       dst           BOOLEAN           DEFAULT FALSE NOT NULL,
 	recStatus	  SMALLINT		  DEFAULT 1 NOT NULL
 );
@@ -54,9 +54,13 @@ CREATE TABLE IF NOT EXISTS thdb.tk_iam_m_systemUsers
 	userId        SMALLINT   	  PRIMARY KEY,
 	username      VARCHAR(64)       NOT NULL,
       password      VARCHAR(128)      NOT NULL,
-	roleId        SMALLINT	        NOT NULL,
-	name          VARCHAR(64)       ,
+	firstName	  VARCHAR(32)	  NOT NULL,
+	middleName	  VARCHAR(32)	  ,
+	lastName	  VARCHAR(32)	  NOT NULL,	
+	sysRoleId     SMALLINT	        NOT NULL,
+	department    VARCHAR(32)       ,
       mobile        VARCHAR(15)       ,
+	salt		  SMALLINT		  ,
       sessiontoken  VARCHAR(512)      ,
 	recStatus	  SMALLINT		  DEFAULT 1 NOT NULL
 );
@@ -86,7 +90,12 @@ CREATE TABLE IF NOT EXISTS thdb.tk_iam_t_tenants
       currencyId    SMALLINT          NOT NULL,
       timeZoneId    SMALLINT          NOT NULL,
       dateFormId    SMALLINT          NOT NULL,
-      status        SMALLINT          DEFAULT 1 NOT NULL,
+	numOfUsers	  SMALLINT		  NOT NULL,
+	orderCap	  SMALLINT		  NOT NULL,
+	authString	  VARCHAR(32)       NOT NULL,
+	validFrom	  INTEGER		  NOT NULL,
+	validTo	  INTEGER		  NOT NULL,
+      tenantStatus  SMALLINT          DEFAULT 0 NOT NULL,
       modifiedBy    VARCHAR(32)       NOT NULL,
       modifiedOn    INTEGER           DEFAULT DATE_PART('epoch', NOW()) NOT NULL	
 );
@@ -110,6 +119,7 @@ CREATE TABLE IF NOT EXISTS thdb.tk_iam_t_tenantContacts
 	mobile	  VARCHAR(15)	  NOT NULL,
 	email		  VARCHAR(32)	  ,
 	isPrimary	  BOOLEAN		  ,
+	recStatus	  SMALLINT		  DEFAULT 1 NOT NULL,
 	modifiedBy    VARCHAR(32)       NOT NULL,
       modifiedOn    INTEGER           DEFAULT DATE_PART('epoch', NOW()) NOT NULL,
 	PRIMARY KEY   (tenantId, contactId)
@@ -121,6 +131,7 @@ CREATE TABLE IF NOT EXISTS thdb.tk_iam_t_tenantRoles
       roleId        SMALLINT          NOT NULL,
       name          VARCHAR(32)       NOT NULL,
       authString    VARCHAR(32)       NOT NULL,
+	recStatus     SMALLINT          DEFAULT 1 NOT NULL,
       modifiedBy    VARCHAR(32)       NOT NULL,
       modifiedOn    INTEGER           DEFAULT DATE_PART('epoch', NOW()) NOT NULL,
 	PRIMARY KEY	  (tenantId, roleId)
@@ -132,8 +143,10 @@ CREATE TABLE IF NOT EXISTS thdb.tk_iam_t_tenantUsers
       userId        SERIAL            NOT NULL,
       username      VARCHAR(64)       NOT NULL,
       password      VARCHAR(64)       NOT NULL,
+	firstName	  VARCHAR(32)	  NOT NULL,
+	middleName    VARCHAR(32)       ,
+	lastName      VARCHAR(32)       NOT NULL,
 	roleId        SMALLINT          NOT NULL,
-      name          VARCHAR(64)       ,
       mobile        VARCHAR(15)       ,
       sessiontoken  VARCHAR(512)      ,
       modifiedBy    VARCHAR(32)       NOT NULL,
