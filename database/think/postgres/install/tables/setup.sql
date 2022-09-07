@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS thdb.tk_setup_m_contentCategory
 CREATE TABLE IF NOT EXISTS thdb.tk_setup_m_orderType
 (
 	orderTypeId		SMALLINT		PRIMARY KEY,
-	type			VARCHAR(16)		NOT NULL,
+	type			VARCHAR(32)		NOT NULL,
 	recStatus		SMALLINT		DEFAULT 1 NOT NULL
 );
 
