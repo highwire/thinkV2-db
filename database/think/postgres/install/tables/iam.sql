@@ -75,8 +75,8 @@ CREATE TABLE IF NOT EXISTS thdb.tk_iam_m_configGroups
 CREATE TABLE IF NOT EXISTS thdb.tk_iam_t_tenants
 (
       tenantId        SMALLSERIAL       PRIMARY KEY,
-      bName           VARCHAR(255)      NOT NULL,
-      abbr            VARCHAR(5)        NOT NULL,
+      businessName    VARCHAR(255)      NOT NULL,
+      abbreviation    VARCHAR(5)        NOT NULL,
       address1        VARCHAR(255)      NOT NULL,
       address2        VARCHAR(255)      ,
       city            VARCHAR(32)       NOT NULL,

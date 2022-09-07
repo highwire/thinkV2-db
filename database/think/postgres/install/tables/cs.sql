@@ -12,13 +12,6 @@ CREATE TABLE IF NOT EXISTS thdb.tk_cs_m_creditStatus
 	recStatus	   SMALLINT		   DEFAULT 1 NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS thdb.tk_cs_m_custCategory
-(
-	custCatId	   SMALLINT  	   PRIMARY KEY,
-	category	   VARCHAR(16)	   NOT NULL,
-	recStatus	   SMALLINT		   DEFAULT 1 NOT NULL
-);
-
 CREATE TABLE IF NOT EXISTS thdb.tk_cs_m_addressTypes
 (
 	addrTypeId	   SMALLINT		   PRIMARY KEY,
@@ -26,18 +19,37 @@ CREATE TABLE IF NOT EXISTS thdb.tk_cs_m_addressTypes
 	recStatus	   SMALLINT		   DEFAULT 1 NOT NULL	   
 );
 
+CREATE TABLE IF NOT EXISTS thdb.tk_cs_t_custCategoryMapping
+(
+	tenantId	   SMALLINT          NOT NULL,
+	custCatId	   SMALLINT  	   NOT NULL,
+	category	   VARCHAR(16)	   NOT NULL,
+	typeId	   SMALLINT		   NOT NULL,	-- 1-Individual, 2-Non-Individual, 3-Agency
+	recStatus	   SMALLINT		   DEFAULT 1 NOT NULL,
+	PRIMARY KEY    (tenantId, custCatId)
+);
+
 CREATE TABLE IF NOT EXISTS thdb.tk_cs_t_customers
 (
-	tenantId	   SMALLINT  	   NOT NULL,
-	custId	   SERIAL		   NOT NULL,
-	categoryId     SMALLINT		   NOT NULL,
+	tenantId	   SMALLINT		   NOT NULL,
+	customerId	   SERIEL		   NOT NULL,
+	custCatId	   SMALLINT		   NOT NULL,
+	typeId	   SMALLINT          NOT NULL,
+	PRIMARY KEY    (tenantId, customerId, custCatId)
+);
+
+CREATE TABLE IF NOT EXISTS thdb.tk_cs_t_customerIndividual
+(
+	customerId	   INTEGER		   PRIMARY KEY,
 	salutation	   VARCHAR(5)	   NOT NULL,
-	firstName	   VARCHAR(32)	   ,
+	firstName	   VARCHAR(32)	   NOT NULL,
 	middleName	   VARCHAR(32)	   ,
 	lastName	   VARCHAR(32)	   ,
-	compName	   VARCHAR(128)	   NOT NULL,
+	suffix	   VARCAHR(32)	   ,
+	companyName	   VARCHAR(128)	   NOT NULL,
 	department	   VARCHAR(128)	   ,
-	email		   VARCHAR(128)	   NOT NULL,
+	primaryEmail   VARCHAR(128)	   NOT NULL,
+	secondaryEmail VARCHAR(128)	   ,
 	countryCode	   VARCHAR(8)	   NOT NULL,
 	phone		   VARCHAR(15)	   NOT NULL,
 	mobile	   VARCHAR(15)	   NOT NULL,
@@ -46,14 +58,29 @@ CREATE TABLE IF NOT EXISTS thdb.tk_cs_t_customers
 	creditStatus   INTEGER		   DEFAULT 1 NOT NULL,
 	recStatus	   SMALLINT		   DEFAULT 1 NOT NULL,
 	modifiedBy     VARCHAR(32)       NOT NULL,
-      modifiedOn     INTEGER           DEFAULT DATE_PART('epoch', NOW()) NOT NULL,
-	PRIMARY KEY	   (tId, custId)
+      modifiedOn     INTEGER           DEFAULT DATE_PART('epoch', NOW()) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS thdb.tk_cs_t_customerNonIndividual
+(
+	customerId	   INTEGER		   PRIMARY KEY,
+	recStatus	   SMALLINT		   DEFAULT 1 NOT NULL,
+	modifiedBy     VARCHAR(32)       NOT NULL,
+      modifiedOn     INTEGER           DEFAULT DATE_PART('epoch', NOW()) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS thdb.tk_cs_t_customerAgency
+(
+	customerId	   INTEGER		   PRIMARY KEY,
+	recStatus	   SMALLINT		   DEFAULT 1 NOT NULL,
+	modifiedBy     VARCHAR(32)       NOT NULL,
+      modifiedOn     INTEGER           DEFAULT DATE_PART('epoch', NOW()) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS thdb.tk_cs_t_custAddresses
 (
 	tenantId	   SMALLINT   	   NOT NULL,
-	custId	   INTEGER		   NOT NULL,
+	customerId	   INTEGER		   NOT NULL,
 	addrId	   SERIAL    	   NOT NULL,
 	isPrimary	   BOOLEAN		   NOT NULL,
 	addrTypeId	   SMALLINT		   NOT NULL, 
