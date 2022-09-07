@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS thdb.tk_cs_t_custCategoryMapping
 CREATE TABLE IF NOT EXISTS thdb.tk_cs_t_customers
 (
 	tenantId	   SMALLINT		   NOT NULL,
-	customerId	   SERIEL		   NOT NULL,
+	customerId	   SERIAL		   NOT NULL,
 	custCatId	   SMALLINT		   NOT NULL,
 	typeId	   SMALLINT          NOT NULL,
 	PRIMARY KEY    (tenantId, customerId, custCatId)
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS thdb.tk_cs_t_customerIndividual
 	firstName	   VARCHAR(32)	   NOT NULL,
 	middleName	   VARCHAR(32)	   ,
 	lastName	   VARCHAR(32)	   ,
-	suffix	   VARCAHR(32)	   ,
+	suffix	   VARCHAR(32)	   ,
 	companyName	   VARCHAR(128)	   NOT NULL,
 	department	   VARCHAR(128)	   ,
 	primaryEmail   VARCHAR(128)	   NOT NULL,
@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS thdb.tk_cs_t_custAddresses
 	validId	   INTEGER		   NOT NULL,
 	modifiedBy     VARCHAR(32)       NOT NULL,
       modifiedOn     INTEGER           DEFAULT DATE_PART('epoch', NOW()) NOT NULL,
-	PRIMARY KEY	   (tId, custId, addrId)
+	PRIMARY KEY	   (tenantId, custId, addrId)
 );
 
 CREATE TABLE IF NOT EXISTS thdb.tk_cs_t_custAddrValidity

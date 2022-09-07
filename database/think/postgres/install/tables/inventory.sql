@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS thdb.tk_inv_t_inventory
 	quantity	  INTEGER		  NOT NULL,
 	vCode		  VARCHAR(15)	  ,
 	modifiedBy    VARCHAR(32)       NOT NULL,
-      modifiedOn    INTEGER           DEFAULT DATE_PART('epoch', NOW()) NOT NULL
+      modifiedOn    INTEGER           DEFAULT DATE_PART('epoch', NOW()) NOT NULL,
 	PRIMARY KEY   (tenantId, inventoryId)
 );
 
@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS thdb.tk_inv_t_inventoryLocations
 	country	  VARCHAR(32)	  NOT NULL,
 	recStatus     SMALLINT          DEFAULT 1 NOT NULL,
 	modifiedBy    VARCHAR(32)       NOT NULL,
-      modifiedOn    INTEGER           DEFAULT DATE_PART('epoch', NOW()) NOT NULL,
+     modifiedOn    INTEGER           DEFAULT DATE_PART('epoch', NOW()) NOT NULL,
 	PRIMARY KEY	  (tenantId, locationId)
 );
 

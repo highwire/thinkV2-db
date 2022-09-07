@@ -9,7 +9,7 @@ INSERT INTO thdb.tk_iam_m_userStatus (uStatusId, status)
 VALUES (0, 'InActive'),
 (1, 'Active');
 
-INSERT INTO thdb.tk_iam_m_currencies (ccuurencyId, currName, code, symbol)
+INSERT INTO thdb.tk_iam_m_currencies (currencyId, currName, code, symbol)
 VALUES (1, 'Leke', 'ALL', 'Lek'),
 (2, 'Dollars', 'USD', '$'),
 (3, 'Afghanis', 'AFN', '؋'),

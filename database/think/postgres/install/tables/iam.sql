@@ -36,9 +36,9 @@ CREATE TABLE IF NOT EXISTS thdb.tk_iam_m_timezones
 (
       timeZoneId      SMALLINT          PRIMARY KEY,
       move            SMALLINT          DEFAULT 241 NOT NULL,
-      offset          VARCHAR(5)        DEFAULT '00:00' NOT NULL,
+      dOffset          VARCHAR(5)        DEFAULT '00:00' NOT NULL,
       dst             BOOLEAN           DEFAULT FALSE NOT NULL,
-	recStatus	    SMALLINT	    DEFAULT 1 NOT NULL
+	 recStatus	    SMALLINT	    DEFAULT 1 NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS thdb.tk_iam_m_systemRoles
