@@ -40,8 +40,8 @@ INSERT INTO thdb.tk_iam_m_systemRoles (sysRoleId, name, authString)
 VALUES (1, 'System Administrator', '111111111'),
 (2, 'System Reporting Executive', '001011101');
 
-INSERT INTO thdb.tk_iam_m_systemUsers (sysUserId, username, password, roleId, name)
-VALUES (1, 'admin', 'e6e061838856bf47e1de730719fb2609', 1, 'Administrator');
+INSERT INTO thdb.tk_iam_m_systemUsers (userId, username, password, firstName, lastName, sysRoleId)
+VALUES (1, 'admin', 'e6e061838856bf47e1de730719fb2609', 'THINK', 'Administrator', 1);
 
 INSERT INTO thdb.tk_iam_m_configGroups (confGrpId, name)
 VALUES (1, 'Core'),

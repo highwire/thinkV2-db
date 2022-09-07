@@ -9,9 +9,9 @@ VALUES (0, 'Black-Listed'),
 (2, 'Moderate'),
 (3, 'Weak');
 
-INSERT INTO thdb.tk_cs_m_custCategory(custCatId, category)
+INSERT INTO thdb.tk_cs_m_custCategoryMapping(custCatId, category)
 VALUES (1, 'Advertiser'),
-(2, 'Agent');
+(2, 'Agent'),
 (3, 'Contributor'),
 (4, 'Editor'),
 (5, 'Individual'),

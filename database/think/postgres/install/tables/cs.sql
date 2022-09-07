@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS thdb.tk_cs_t_custAddresses
 	validId	   INTEGER		   NOT NULL,
 	modifiedBy     VARCHAR(32)       NOT NULL,
       modifiedOn     INTEGER           DEFAULT DATE_PART('epoch', NOW()) NOT NULL,
-	PRIMARY KEY	   (tenantId, custId, addrId)
+	PRIMARY KEY	   (tenantId, customerId, addrId)
 );
 
 CREATE TABLE IF NOT EXISTS thdb.tk_cs_t_custAddrValidity
