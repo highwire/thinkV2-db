@@ -25,3 +25,5 @@ CREATE TABLE IF NOT EXISTS thdb.tk_setup_m_orderType
 	type			VARCHAR(16)		NOT NULL,
 	recStatus		SMALLINT		DEFAULT 1 NOT NULL
 );
+
+COMMIT;
